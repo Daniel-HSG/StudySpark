@@ -1,10 +1,13 @@
 # Web-Framework
 streamlit>=1.32.0
 
-# LangChain und OpenAI
-langchain>=0.1.0
-langchain-openai>=0.0.5
-langchain-community>=0.0.10
+# LangChain-Pakete (spezifische Versionen)
+langchain==0.1.4
+langchain-core==0.1.15
+langchain-openai==0.0.5
+langchain-community==0.0.13
+
+# OpenAI
 openai>=1.10.0
 
 # Vektordatenbank und Embeddings
@@ -19,9 +22,3 @@ python-dotenv>=1.0.0
 # Grundlegende Bibliotheken
 numpy>=1.24.0
 pandas>=2.0.0
-
-# Datenbank
-sqlite3
-
-# Dateisystem-Operationen
-glob2>=0.7
