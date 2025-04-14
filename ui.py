@@ -22,16 +22,23 @@ class UserInterface:
         self.student_id = "student_123"  # Standard-Student-ID
         self.student_progress = None
     
-    def initialize_session(self, student_id="student_123"):
+    def initialize_session(self, student_id=None):
         """Initialisiert eine neue Sitzung für einen Studenten und generiert die erste Frage im Voraus."""
-        self.student_id = student_id
-        self.student_progress = self.service.get_student_progress(student_id)
+        # Verwende die übergebene ID oder die Standard-ID
+        if student_id:
+            self.student_id = student_id
+        else:
+            # Wenn keine ID übergeben wurde, verwende die Standard-ID
+            self.student_id = "student_123"
+        
+        self.student_progress = self.service.get_student_progress(self.student_id)
         self.current_question = None
         self.current_feedback = None
         self.followup_history = []
-        
+                
         # Erste Frage im Voraus generieren
-        self.service.pregenerate_question(student_id)
+        self.service.pregenerate_question(self.student_id)
+
     
     def get_new_question(self):
         """Holt eine neue Frage vom Service (vorgeneriert oder frisch generiert)."""

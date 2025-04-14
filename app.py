@@ -24,8 +24,37 @@ if os.path.exists("brand_styles.css"):
 if 'first_visit' not in st.session_state:
     st.session_state.first_visit = True
 
-if 'loading' not in st.session_state:
-    st.session_state.loading = False
+# Prüfe, ob bereits eine ID in den URL-Parametern existiert
+if "student_id" in st.query_params and 'student_id' not in st.session_state:
+    # ID aus URL-Parametern verwenden
+    student_id = st.query_params["student_id"]
+    st.session_state.student_id = student_id
+    
+    # Wenn wir eine ID haben, aber noch im Startbildschirm sind, versuche direkt zu initialisieren
+    if st.session_state.first_visit and 'username' in st.session_state and st.session_state.username:
+        try:
+            # Learning-Service erstellen
+            from services import LearningService
+            from ui import StreamlitFrontend
+            
+            service = LearningService()
+            st.session_state.service = service
+            st.session_state.frontend = StreamlitFrontend(service)
+            st.session_state.frontend.initialize_session(student_id)
+            
+            st.session_state.current_question = None
+            st.session_state.current_feedback = None
+            st.session_state.show_feedback = False
+            st.session_state.next_question = None
+            
+            # Direkt zur Hauptansicht wechseln
+            st.session_state.first_visit = False
+            st.session_state.initialized = True
+            st.rerun()
+        except Exception:
+            # Wenn die Initialisierung fehlschlägt, bleiben wir beim Startbildschirm
+            pass
+
 
 # Startbildschirm anzeigen, wenn es der erste Besuch ist
 if st.session_state.first_visit and 'initialized' not in st.session_state:
@@ -76,7 +105,6 @@ if st.session_state.first_visit and 'initialized' not in st.session_state:
     # Namenseingabe hinzufügen
     if 'username' not in st.session_state:
         st.session_state.username = ""
-
     username = st.text_input("Dein Name:", value=st.session_state.username)
 
     # Start-Button
@@ -85,15 +113,36 @@ if st.session_state.first_visit and 'initialized' not in st.session_state:
         if username.strip():
             st.session_state.username = username
             
-            # Generiere eine eindeutige Student-ID basierend auf dem Namen
-            import hashlib
-            import time
+            # Sofort einen Ladebalken anzeigen, ohne auf den Seitenneuladen zu warten
+            progress_placeholder = st.empty()
+            progress_bar = progress_placeholder.progress(0)
+            progress_text = st.empty().text("Initialisiere deine Lernerfahrung...")
             
-            # Kombiniere den Namen mit dem aktuellen Zeitstempel für Eindeutigkeit
-            unique_string = username + str(time.time())
-            # Erstelle einen Hash und verwende die ersten 8 Zeichen als ID
-            hashed = hashlib.md5(unique_string.encode()).hexdigest()[:8]
-            student_id = f"student_{hashed}"
+            # Fortschritt für die Initialisierung anzeigen
+            progress_bar.progress(10)
+            progress_text.text("Erstelle deine persönliche ID...")
+            
+            # Prüfe, ob bereits eine ID in den URL-Parametern existiert
+            if "student_id" in st.query_params:
+                student_id = st.query_params["student_id"]
+            else:
+                # Generiere eine eindeutige Student-ID basierend auf dem Namen
+                import hashlib
+                import time
+                
+                # Kombiniere den Namen mit dem aktuellen Zeitstempel für Eindeutigkeit
+                unique_string = username + str(time.time())
+                # Erstelle einen Hash und verwende die ersten 8 Zeichen als ID
+                hashed = hashlib.md5(unique_string.encode()).hexdigest()[:8]
+                student_id = f"student_{hashed}"
+                
+                # Speichere die ID in den URL-Parametern
+                st.query_params["student_id"] = student_id
+            
+            progress_bar.progress(30)
+            progress_text.text("Initialisiere deinen Lernservice...")
+            
+            # Speichere die ID in der Session
             st.session_state.student_id = student_id
             
             # Initialisiere zuerst den Service und das Frontend
@@ -102,98 +151,48 @@ if st.session_state.first_visit and 'initialized' not in st.session_state:
                 from services import LearningService
                 from ui import StreamlitFrontend
                 
+                progress_bar.progress(50)
+                progress_text.text("Erstelle deine personalisierte Lernumgebung...")
+                
                 service = LearningService()
                 st.session_state.service = service
                 st.session_state.frontend = StreamlitFrontend(service)
-                st.session_state.frontend.initialize_session(student_id)  # Verwende die generierte ID
                 
-                st.session_state.current_question = None
+                progress_bar.progress(70)
+                progress_text.text("Bereite deine erste Frage vor...")
+                
+                st.session_state.frontend.initialize_session(student_id)
+                
+                # Lade die erste Frage direkt
+                progress_bar.progress(80)
+                progress_text.text("Lade deine erste Frage...")
+                
+                # Lade die erste Frage direkt hier
+                st.session_state.current_question = st.session_state.frontend.get_new_question()
                 st.session_state.current_feedback = None
                 st.session_state.show_feedback = False
                 st.session_state.next_question = None
                 
-                # Dann zum Ladebildschirm wechseln
+                progress_bar.progress(100)
+                progress_text.text("Fertig! Starte deine Lernumgebung...")
+                
+                # Kurze Verzögerung, damit der Benutzer den 100%-Fortschritt sehen kann
+                import time
+                time.sleep(0.5)
+                
+                # Direkt zur Hauptansicht wechseln (ohne Ladebildschirm)
                 st.session_state.first_visit = False
-                st.session_state.loading = True
                 st.session_state.initialized = True
+                
                 st.rerun()
             except Exception as e:
                 st.error(f"Initialisierungsfehler: {str(e)}")
         else:
             st.error("Bitte gib deinen Namen ein, um fortzufahren.")
+
     st.markdown('</div>', unsafe_allow_html=True)
 
-
     # Beende die Ausführung hier, damit der Rest des Codes nicht ausgeführt wird
-    st.stop()
-
-# Lade-Bildschirm anzeigen
-elif st.session_state.loading:
-    # CSS für den Ladebildschirm
-    st.markdown("""
-    <style>
-    .main-title {
-        font-size: 3.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        text-align: left;
-        margin-top: 30vh;
-        padding-left: 2.5rem;
-    }
-    .loading-text {
-        text-align: left;
-        margin: 2rem 0;
-        font-size: 1.2rem;
-        color: #4B8BF5;
-        
-    }
-    footer {
-        visibility: hidden;
-    }
-    #MainMenu {
-        visibility: hidden;
-    }
-    /* Entfernt den roten Balken am linken Rand */
-    .stApp {
-        border-left: none !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    st.markdown('<h1 class="main-title">StudySpark</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="loading-text">Wir bereiten deine individuelle Lernerfahrung vor...</p>', unsafe_allow_html=True)
-    
-    # Ladebalken
-    progress_container = st.container()
-    with progress_container:
-        progress_bar = st.progress(0)
-        for i in range(100):
-            import time
-            time.sleep(0.02)
-            progress_bar.progress(i + 1)
-    
-    # Lade die erste Frage
-    try:
-        # Stelle sicher, dass das Frontend initialisiert ist
-        if hasattr(st.session_state, 'frontend') and st.session_state.frontend is not None:
-            # Lade eine neue Frage
-            st.session_state.current_question = st.session_state.frontend.get_new_question()
-            
-            # Beende den Ladevorgang
-            st.session_state.loading = False
-            st.rerun()
-        else:
-            st.error("Frontend nicht initialisiert. Bitte Seite neu laden.")
-            if st.button("Neu starten"):
-                st.session_state.first_visit = True
-                st.session_state.loading = False
-                st.rerun()
-    except Exception as e:
-        st.error(f"Fehler beim Laden der Frage: {str(e)}")
-        if st.button("Erneut versuchen"):
-            st.rerun()
-    
-    # Beende die Ausführung hier
     st.stop()
 
 # Normale Anwendung anzeigen
