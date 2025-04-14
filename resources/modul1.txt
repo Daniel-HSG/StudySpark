@@ -1,0 +1,161 @@
+1. EinfÃ¼hrung in die Betriebswirtschaftslehre (BWL)
+Definition und Ursprung:
+- Ursprung aus dem Altgriechischen:
+  - Î¿á¼¶ÎºÎ¿Ï‚ (oÄ©kos): Haus.
+  - Î½ÏŒÎ¼Î¿Ï‚ (nÃ³mos): Gesetz.
+- Aristoteles unterschied zwischen:
+  - Ã–konomik: HaushÃ¤lterischer Umgang mit Ressourcen zur Sicherung der GrundbedÃ¼rfnisse.
+  - Chrematistik: Kunst der Geldvermehrung, die er kritisch betrachtete.
+- Moderne BWL: Entwickelte sich aus der Moralphilosophie (Adam Smith, John Stuart Mill) hin zu einer eigenstÃ¤ndigen Wissenschaft.
+
+Wissenschaftliche Einordnung:
+- Teil der Sozialwissenschaften, untersucht wirtschaftliches Handeln im gesellschaftlichen Kontext.
+- Kernfrage der BWL: Was wird wie und fÃ¼r wen produziert?
+- Ziel: Effiziente Nutzung begrenzter Ressourcen zur Maximierung von Wohlstand und Nutzen.
+
+Historische Entwicklung:
+- Vor der Neoklassik (bis ca. 1870): Pluralistische Perspektiven, Ethik und Politik als Grundlage der Marktwirtschaft.
+- Neoklassik (ab 1870): Fokus auf Marktmechanismen, Homo Oeconomicus, und vollkommene MÃ¤rkte.
+- Diskussion: Alternativen zur Marktwirtschaft (z. B. staatliche Eingriffe, Verteilungslogiken).
+
+2. Das St. Galler Management-Modell (SGMM)
+Grundlagen:
+- Management: â€žReflexive Gestaltungspraxis von WertschÃ¶pfungssystemenâ€œ.
+- Organisation: â€žSoziotechnisches System, das Leistungen gegen Entgelt erbringtâ€œ.
+- UmweltsphÃ¤ren: â€žChancen- und Ressourcenraumâ€œ, der externe EinflÃ¼sse auf das Unternehmen beschreibt.
+
+Zentrale Elemente:
+1. Stakeholder (Anspruchsgruppen):
+   - Beispiele: Kunden, Lieferanten, Kapitalgeber, Mitarbeitende, NGOs, Staat.
+   - MÃ¤rkte Ã¼berlagern sich: Ein Kunde kann auch AktionÃ¤r sein.
+   - Ziel des Managements: Interessen ausgleichen, Zusammenhalt sichern.
+2. UmweltsphÃ¤ren:
+   - Gesellschaftliche, wirtschaftliche, technologische und natÃ¼rliche Umwelt.
+   - Nachhaltigkeit als Ã¼bergreifendes Ziel (Triple Bottom Line).
+   - Beispiele: Einfluss von Technologien, Regulierungen oder gesellschaftlichen Trends.
+3. Sinnhorizonte:
+   - Normatives Management: Vision, Mission, Leitbild (z. B. Unternehmensethik).
+   - Strategisches Management: WettbewerbsfÃ¤higkeit durch Planung und Ressourcen.
+   - Operatives Management: TagesgeschÃ¤ft, Effizienz, und Prozesssteuerung.
+
+Praxisbeispiele:
+- Nachhaltigkeits-Cockpit der Kraftwerke Oberhasli (KWO): JÃ¤hrliche ÃœberprÃ¼fung von Ã¶kologischen, Ã¶konomischen und sozialen Zielen.
+
+3. GeschÃ¤ftsprozesse und WertschÃ¶pfung
+Definition von GeschÃ¤ftsprozessen:
+- Abfolge von AktivitÃ¤ten, die Input (z. B. Rohstoffe) in Output (z. B. Produkte) mit einem messbaren Wert fÃ¼r den Kunden transformieren.
+- Beispiele: Produktion, Logistik, Kundenservice.
+
+Struktur der GeschÃ¤ftsprozesse:
+1. Kundenprozesse:
+   - Reputationsbildung: Markenaufbau, Vertrauen schaffen (z. B. durch Storytelling).
+   - Kundenakquise: Gewinnung neuer Kunden durch Marketing und Vertrieb.
+   - Kundenbindung: MaÃŸnahmen wie Bonusprogramme, Lock-in-Effekte.
+2. Leistungserstellungsprozesse:
+   - Beschaffung: Auswahl und Management von Lieferanten.
+   - Produktion: Fertigungstypen, Outsourcing, IT-Steuerung.
+   - Distribution: Logistik und VertriebskanÃ¤le.
+3. Leistungsinnovationsprozesse:
+   - Entwicklung neuer Produkte/Dienstleistungen.
+   - Einsatz neuer Technologien (z. B. KI, Blockchain).
+
+WertschÃ¶pfungskette:
+- Traditionelle Modelle: Lineare Prozesse (Produktion â†’ Verkauf).
+- Digitale Transformation: PlattformÃ¶konomie (z. B. Airbnb, Uber) und individualisierte WertschÃ¶pfung.
+- Positive Netzwerkeffekte: Je mehr Anbieter und Kunden, desto grÃ¶ÃŸer der Nutzen.
+
+4. Marketingkonzept
+Definition:
+- Ein schlÃ¼ssiger, ganzheitlicher Handlungsplan zur Erreichung von Unternehmenszielen.
+- Elemente: Ziele, Strategien, Marketing-Mix.
+
+Normative Orientierungsprozesse:
+- Entwicklung von Vision, Mission, Leitbild und Ethik-Kodex.
+- Beispiel: Patagonia kombiniert Nachhaltigkeit mit unternehmerischem Aktivismus.
+
+Strategische Prozesse:
+- Marktanalysen: SWOT-Analyse, Branchenanalyse, Portfolioanalyse.
+- Zielmarktentscheidungen: Auswahl der Zielgruppen.
+- Positionierung: Differenzierung von Wettbewerbern.
+
+Operative Prozesse:
+- Marketing-Mix: Produktgestaltung, Preisgestaltung, Kommunikation, Distribution.
+- Controlling: Ãœberwachung von Kennzahlen, Fortschrittsmessung.
+
+5. Marketingstrategie
+Ziele:
+- Definition von ZielmÃ¤rkten und Positionierung.
+- Aufbau von Wettbewerbsvorteilen durch Kernkompetenzen.
+
+Kernaspekte:
+- Marktsegmentierung: Aufteilung des Markts in homogene Zielgruppen.
+- Positionierung: Einzigartige Stellung im Markt schaffen (z. B. durch Markenimage).
+
+Analyse:
+- Strategische Gruppen: Wettbewerbsanalyse innerhalb der Branche.
+- Anspruchsgruppenanalyse: Interessen und EinflÃ¼sse der Stakeholder.
+
+6. Marketing-Mix
+Produktgestaltung:
+- Entwicklung von Dienstleistungen und physischen Produkten.
+- Lebenszyklusmodell: EinfÃ¼hrung, Wachstum, Reife, SÃ¤ttigung, RÃ¼ckgang.
+
+Preisgestaltung:
+- BerÃ¼cksichtigung von Zahlungsbereitschaft, Kosten und Wettbewerb.
+- Strategien: Penetrationspreise, Premiumpreise.
+
+Kommunikation:
+- Werbung, PR, Social Media, Direktmarketing.
+- Ziel: Kunden informieren, Ã¼berzeugen und binden.
+
+Distribution:
+- Auswahl der KanÃ¤le (z. B. Direktvertrieb, E-Commerce, Einzelhandel).
+- Logistik und Lieferkettenmanagement.
+
+7. Controlling und Innovation
+Marketing-Controlling:
+- Ãœberwachung von Kennzahlen wie Umsatz, Deckungsbeitrag, Kundenzufriedenheit.
+- Fortschrittsmessung und PrÃ¤missenkontrolle.
+
+Innovation:
+- Entwicklung neuer GeschÃ¤ftsmodelle und Technologien.
+- Anpassung an MarktverÃ¤nderungen und KundenbedÃ¼rfnisse.
+
+Beispiele:
+- PlattformÃ¶konomie (z. B. Amazon, Apple) als Innovationstreiber.
+- Blockchains: Dokumentierte, beweissichere Direktbeziehungen ohne Plattformen.
+
+8. Kundenorientierung und Customer Value
+Kundenzufriedenheit:
+- Wahrgenommene QualitÃ¤t im Vergleich zu Alternativen.
+- Einfluss auf LoyalitÃ¤t, Wiederkauf und Mundpropaganda.
+
+Customer Value:
+- Relativer Kundenvorteil: Nutzen minus Kosten im Vergleich zu Alternativen.
+- Behavioral Outcomes: Zahlungsbereitschaft, Weiterempfehlung.
+
+Kundenbindung:
+- Strategien: Lock-in-Effekte, emotionale Bindung, Bonusprogramme.
+
+9. Nachhaltigkeit und UmweltsphÃ¤ren
+Nachhaltigkeit:
+- â€žTriple Bottom Lineâ€œ: Ã–kologische, Ã¶konomische und soziale Ziele.
+- Beispiele: SDGs (Sustainable Development Goals) der UNO.
+
+UmweltsphÃ¤ren:
+- Gesellschaft, Wirtschaft, Technologie, Natur.
+- Einfluss auf Unternehmensstrategien und GeschÃ¤ftsprozesse.
+
+Praxisbeispiele:
+- Nachhaltigkeits-Cockpit der KWO: ÃœberprÃ¼fung und Anpassung von Zielen.
+
+10. Entwicklung der WertschÃ¶pfungsketten
+Traditionelle Modelle:
+- Feste AblÃ¤ufe und Strukturen (z. B. Produktion â†’ Verkauf).
+
+Digitale Transformation:
+- PlattformÃ¶konomie (z. B. Airbnb, Uber).
+- Blockchain: Direkte Transaktionen ohne Vermittler.
+
+Beispiele:
+- Vergleich von traditionellen Unternehmen (z. B. Migros) und Plattformen.

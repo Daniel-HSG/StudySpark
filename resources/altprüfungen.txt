@@ -1,0 +1,82 @@
+
+### Dokument: BWL SGMM 2018
+
+#### Multiple-Choice-Aufgaben:
+1.1 Der strategische Sinnhorizont bestimmt die Werte, die in einer Organisation gelebt werden. Falsch  
+1.2 Â«ManagementÂ» ist die englische Ãœbersetzung von Â«FÃ¼hrungÂ» und heiÃŸt daher dasselbe. Falsch  
+1.3 Ein Teil der erfolgreich umgesetzten Strategien einer Organisation wurde gar nie bewusst geplant. Richtig  
+1.4 Kommunikation in der Organisation ist deswegen so schwierig, weil Sender und EmpfÃ¤nger oft nicht dieselbe Sprache sprechen. Falsch  
+1.5 Das St. Galler Management-Modell gibt genaue Anleitungen, welche Entscheidungen in welchen Situationen zu fÃ¤llen sind. Falsch  
+1.6 Arbeitsteilung ist die Folge der Spezialisierung am Arbeitsplatz. Falsch  
+1.7 Die Organisation muss sich mit ihrer Umwelt entwickeln (Â«Ko-EvolutionÂ»), um ihre Legitimation zu behalten. Richtig  
+1.8 Entscheidungen absorbieren Ungewissheit und ermÃ¶glichen Orientierung. Richtig  
+1.9 Die organisationsspezifische Ressourcenkonfiguration weist aus, welche Kosten mit welchen Ressourcentypen einer Organisation zu erwarten sind. Falsch  
+1.10 Wenn Organisationen sich verÃ¤ndern sollen, ist die Stabilisation der Organisation besonders wichtig. Richtig  
+
+#### Textaufgaben:
+**2.1 Beschreiben Sie den Zweck einer Umweltanalyse!**  
+- Definition der relevanten Umwelt (PrimÃ¤rumwelt)  
+- Entwicklung in den relevanten UmweltsphÃ¤ren beobachten und analysieren  
+- Erkennen von Chancen und Gefahren  
+- Ko-Evolution mit der Umwelt  
+
+**2.2 Erstellen Sie die Umweltanalyse aufgrund der Entwicklung, die im NZZ-Artikel beschrieben ist!**  
+- UmweltsphÃ¤ren: Technologie (Big Data/Gesichtserkennung), Politik (chinesische Regierung), Religion (Muslim), Ã–ffentlichkeit (Menschenrechte)  
+- Ressourcen: Investoren als Kapitalgeber  
+- Stakeholder: Uiguren, chinesische Regierung, Technologie-Unternehmen, Menschenrechtsaktivisten  
+- Kontroversen: AusschÃ¶pfung technischer MÃ¶glichkeiten, Glaubensfreiheit  
+
+**2.3 Zeigen Sie anhand des Falls, was das St. Galler Management-Modell meint, wenn es die Umwelt als Â«MÃ¶glichkeitsraumÂ» bezeichnet!**  
+- China ist potenzieller Abnehmer und Anwendungsfall fÃ¼r Technologieentwicklung.  
+- LegitimitÃ¤t kann geschaffen werden, indem China nicht beliefert wird.  
+
+---
+
+### Dokument: BWL MOF 2018
+
+#### Multiple-Choice-Aufgaben:
+1.1.1 Wie kann NettowertschÃ¶pfung definiert werden?  
+**Antwort:** Umsatz â€“ Vorleistungen â€“ Abschreibungen  
+
+1.1.2 Warum werden Kunden im Laufe der Zeit immer rentabler?  
+**Antworten:**  
+- Wegen dem Beitrag zur Akquisition neuer Kunden (Â«word of mouthÂ»)  
+- Wegen den hohen Akquisitionskosten zu Beginn der Kundenbeziehung  
+
+1.1.3 Welches ist das primÃ¤re Ziel von GeschÃ¤ftsprozessen?  
+**Antwort:** WertschÃ¶pfung generieren  
+
+1.1.4 Wie sind GeschÃ¤ftsprozesse charakterisiert?  
+**Antworten:**  
+- GeschÃ¤ftsprozesse setzen sich aus Leistungserstellungs-, Leistungsinnovations- und Leistungsverkaufsprozess zusammen.  
+- GeschÃ¤ftsprozesse verbinden MÃ¤rkte und blicken jeweils mindestens einen Markt zurÃ¼ck und voraus.  
+
+1.1.5 Auf welche unterschiedliche Arten kann Marketing definiert werden?  
+**Antworten:**  
+- Als Funktion  
+- Als FÃ¼hrungsphilosophie  
+
+---
+
+#### Fallstudienfragen:
+**2.1.1 Zeichnen Sie die WertschÃ¶pfungskette der Musikindustrie im Jahre 1960.**  
+- Komponist â†’ Interpret â†’ Studio â†’ Produktion â†’ GroÃŸhandel â†’ Einzelhandel  
+
+**2.1.2 Beschreiben Sie die wichtigsten drei Merkmale der Disruption von WertschÃ¶pfungsketten der Musikindustrie durch IT in den 2000er Jahren.**  
+- Digitalisierung: Gratis VervielfÃ¤ltigung  
+- Breitband-Internet: Streaming statt TontrÃ¤ger  
+- Plattformen: Wegfall von GroÃŸ- und Einzelhandel  
+
+**2.2.1 Beurteilen Sie den Retrotrend fÃ¼r Schallplatten: Handelt es sich um einen kurzfristigen Hype oder einen Megatrend?**  
+**Hype:**  
+- Kultige Wohnzimmer-Gadgets kÃ¶nnten rasch wieder verschwinden.  
+- Kurzfristig betrifft oft nur einzelne Produkte.  
+**Megatrend:**  
+- Schallplatten als physische SammelgegenstÃ¤nde erleben ein Comeback.  
+- Gegentrend zur Digitalisierung.  
+
+**2.3.1 Was ist das Â«KernproduktÂ» bei einer Schallplatte?**  
+- Nicht-synthetische Musik: Platte als Grundlage fÃ¼r ursprÃ¼ngliche Form des Musikgenusses.  
+- Kunst-Gegenstand: Platte als physisch fassbares Artefakt.  
+
+---
