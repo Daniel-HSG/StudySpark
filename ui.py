@@ -470,7 +470,12 @@ class StreamlitFrontend(UserInterface):
             meme_path = meme_paths.get(level)
             if meme_path and os.path.exists(meme_path):
                 meme_image = Image.open(meme_path)
-                st.sidebar.image(meme_image, use_container_width=True)  # Korrigierter Parameter
+                # Erstelle drei Spalten für die Zentrierung
+                left_col, center_col, right_col = st.sidebar.columns([1, 2, 1])
+
+                # Zeige das Bild in der mittleren Spalte an
+                with center_col:
+                    st.image(meme_image, width=int(meme_image.width/3))
             else:
                 # Fallback, wenn das Bild nicht gefunden wird
                 st.sidebar.info(f"Level {level} Meme nicht gefunden")
