@@ -527,7 +527,7 @@ class StreamlitFrontend(UserInterface):
             
             **Level-Aufstieg:** Bei 100% Fortschritt steigst du automatisch ein Level auf und beginnst dort bei 0%.
             """)
-            
+
         # Hinzufügen eines Leaderboards
         st.sidebar.markdown("---")
         st.sidebar.subheader("🏆 Leaderboard")
@@ -537,11 +537,29 @@ class StreamlitFrontend(UserInterface):
             conn = sqlite3.connect("learning_progress.db")
             cursor = conn.cursor()
             
+            # Prüfen, ob die Tabelle für Benutzernamen existiert, wenn nicht, erstelle sie
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS usernames (
+                    student_id TEXT PRIMARY KEY,
+                    username TEXT
+                )
+            """)
+            conn.commit()
+            
+            # Speichere den aktuellen Benutzernamen, wenn er existiert
+            if hasattr(st.session_state, 'username') and st.session_state.username and self.student_id:
+                cursor.execute("""
+                    INSERT OR REPLACE INTO usernames (student_id, username)
+                    VALUES (?, ?)
+                """, (self.student_id, st.session_state.username))
+                conn.commit()
+            
             # Hole alle Benutzer, sortiert nach Level (absteigend) und Fortschritt (absteigend)
             cursor.execute("""
-                SELECT student_id, level, progress 
-                FROM progress 
-                ORDER BY level DESC, progress DESC
+                SELECT p.student_id, p.level, p.progress, u.username
+                FROM progress p
+                LEFT JOIN usernames u ON p.student_id = u.student_id
+                ORDER BY p.level DESC, p.progress DESC
                 LIMIT 3
             """)
             
@@ -549,15 +567,18 @@ class StreamlitFrontend(UserInterface):
             
             # Ermittle die Position des aktuellen Benutzers
             cursor.execute("""
-                SELECT student_id, level, progress,
+                SELECT p1.student_id, p1.level, p1.progress,
                 (SELECT COUNT(*) + 1 FROM progress p2 
-                WHERE (p2.level > p1.level) OR (p2.level = p1.level AND p2.progress > p1.progress)) as position
+                WHERE (p2.level > p1.level) OR (p2.level = p1.level AND p2.progress > p1.progress)) as position,
+                u.username
                 FROM progress p1
-                WHERE student_id = ?
+                LEFT JOIN usernames u ON p1.student_id = u.student_id
+                WHERE p1.student_id = ?
             """, (self.student_id,))
             
             current_user_data = cursor.fetchone()
             current_position = current_user_data[3] if current_user_data else "?"
+            current_username = current_user_data[4] if current_user_data and len(current_user_data) > 4 else None
             
             conn.close()
             
@@ -570,12 +591,8 @@ class StreamlitFrontend(UserInterface):
                     # Erstelle einen farbigen Hintergrund für jeden Eintrag
                     bg_colors = ["#FFD700", "#C0C0C0", "#CD7F32"]  # Gold, Silber, Bronze
                     
-                    # Extrahiere eine lesbare Benutzer-ID
-                    if user[0] == self.student_id:
-                        # Verwende den gespeicherten Benutzernamen für den aktuellen Benutzer
-                        display_name = st.session_state.username if hasattr(st.session_state, 'username') and st.session_state.username else f"Student {user[0].split('_')[-1]}"
-                    else:
-                        display_name = f"Student {user[0].split('_')[-1]}" if '_' in user[0] else user[0]
+                    # Verwende den Benutzernamen, falls vorhanden, sonst die ID
+                    display_name = user[3] if user[3] else f"Student {user[0].split('_')[-1]}"
                     
                     # HTML für einen schönen Leaderboard-Eintrag
                     html = f"""
@@ -602,8 +619,9 @@ class StreamlitFrontend(UserInterface):
                 st.sidebar.info("Noch keine Benutzer im Leaderboard.")
             
             # Zeige den aktuellen Benutzer und seine Position
-            if hasattr(st.session_state, 'username') and st.session_state.username:
-                st.sidebar.markdown(f"**{st.session_state.username}'s Position:** #{current_position}")
+            display_username = current_username or st.session_state.username if hasattr(st.session_state, 'username') else None
+            if display_username:
+                st.sidebar.markdown(f"**{display_username}'s Position:** #{current_position}")
             else:
                 st.sidebar.markdown(f"**Deine Position:** #{current_position}")
 
@@ -648,6 +666,7 @@ class StreamlitFrontend(UserInterface):
                 st.sidebar.markdown(f"**Deine Position:** #?")
 
         st.sidebar.markdown("---")
+
 
 
 

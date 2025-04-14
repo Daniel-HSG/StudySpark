@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #417EFF;
+  --primary-light-color: #EAF4FF;
+  --secondary-color: #2F3C61;
+  --background-color: #FFFFFF;
+  --sidebar-background-color: #DDDDDD;
+  --text-color: #2F3C61;
+  --error-color: #EA4335;
+  --success-color: #A8F0C6;
+  --info-background-color: #EAF4FF;
+  --button-hover-color: #315BBF;
+}
+
+/* Grundlegende Textfarbe für alle Elemente */
+* {
+  color: var(--text-color) !important;
+}
+
+/* Ausnahmen für spezifische Elemente */
+.stButton > button {
+  color: #FFFFFF !important;
+}
+
+.stError,
+.stAlert[data-baseweb="notification"][data-testid="stAlert-error"] {
+  background-color: var(--error-color) !important;
+}
+
+/* Wichtig: Texte in Fehlerboxen sollten dunkel sein, nicht weiß */
+.stError *,
+.stAlert[data-baseweb="notification"][data-testid="stAlert-error"] * {
+  color: #333333 !important;
+}
+
+/* Stellen Sie sicher, dass Texte in allen Boxen lesbar sind */
+.stSuccess *, .stInfo *,
+.stAlert[data-baseweb="notification"][data-testid="stAlert-success"] *,
+.stAlert[data-baseweb="notification"][data-testid="stAlert-info"] * {
+  color: var(--text-color) !important;
+}
+
+/* Checkbox-Haken Farbe anpassen */
+.stCheckbox [data-baseweb="checkbox"] input:checked + div::before {
+  border-color: #333333 !important;
+}
+
+/* Spezifische Anpassung für Expander und andere Container */
+div[data-testid="stExpander"] > div > div {
+  color: var(--text-color) !important;
+}
+
+.stApp {
+  background-color: #FFFFFF !important;
+}
+
+[data-testid="stSidebar"] {
+  background-color: #DDDDDD !important;
+}
+
+/* Eingabefelder in Weiß */
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea,
+.stSelectbox > div > div,
+.stNumberInput > div > div {
+  background-color: #FFFFFF !important;
+  border: 1px solid #DDDDDD !important;
+}
+
+/* Buttons in Hellblau */
+.stButton > button {
+  background-color: #EAF4FF !important;
+  color: #2F3C61 !important;
+  border: 1px solid #417EFF !important;
+}
+
+.stButton > button:hover {
+  background-color: #417EFF !important;
+  color: #FFFFFF !important;
+}
+/* Rahmen in Textfarbe mit abgerundeten Ecken */
+div[data-testid="stExpander"], 
+details,
+.stForm,
+.stAlert,
+.stInfo,
+.stSuccess,
+.stError {
+  border: 1px solid #2F3C61 !important;
+  border-radius: 5px !important;
+}
+
+/* Markdown-Trennlinien in der Textfarbe */
+.stMarkdown hr {
+  border-top: 1px solid #2F3C61 !important;
+}
+/* Dropdown-Menü im Expander-Stil */
+.stSelectbox > div {
+  background-color: #DDDDDD !important;
+  border: 1px solid #2F3C61 !important;
+  border-radius: 5px !important;
+}
+
+.stSelectbox > div > div {
+  background-color: #DDDDDD !important;
+  color: #2F3C61 !important;
+}
+
+/* Dropdown-Text und Label */
+.stSelectbox label {
+  color: #2F3C61 !important;
+}
+/* Header komplett entfernen */
+header[data-testid="stHeader"] {
+  display: none !important;
+}
+
+/* Falls nötig, auch den Platz entfernen, den der Header einnimmt */
+.main .block-container {
+  padding-top: 1rem !important;
+}
+.stProgress > div > div > div > div {
+  background-color: var(--primary-color)
+}

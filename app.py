@@ -5,9 +5,20 @@ Direkter Einstiegspunkt für die Streamlit-Anwendung
 import streamlit as st
 from services import LearningService
 from ui import StreamlitFrontend
+import os
 
 # Seiteneinstellungen
 st.set_page_config(page_title="StudySpark", page_icon="📚")
+
+# Brand Design CSS laden
+def load_css(css_file):
+    with open(css_file, 'r') as f:
+        css = f.read()
+    st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+
+# Lade die Brand Design Anpassungen
+if os.path.exists("brand_styles.css"):
+    load_css("brand_styles.css")
 
 # Session-State für den Startbildschirm
 if 'first_visit' not in st.session_state:
