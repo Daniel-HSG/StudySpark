@@ -5,6 +5,7 @@ Kombiniert Frontend-Implementierungen (Konsole und Streamlit)
 import streamlit as st
 from services import LearningService
 from models import BLOOM_LEVELS
+import sqlite3
 
 class UserInterface:
     """
@@ -433,39 +434,251 @@ class StreamlitFrontend(UserInterface):
                 return followup_question.strip()
         
         return None
-
-
-
+    #
     def display_progress(self, progress_data):
         """Zeigt den Fortschritt an."""
         import streamlit as st
-        
+        from PIL import Image
+        import os
+            
         if not progress_data:
             return
-            
+                
         # Grundlegende Fortschrittsinformationen
         level = progress_data.get('level', 1)
         progress = progress_data.get('progress', 0)
         
+        # Meme basierend auf dem Level anzeigen
+        meme_paths = {
+            1: "resources/memes/level1_meme.jpg",
+            2: "resources/memes/level2_meme.jpg",
+            3: "resources/memes/level3_meme.jpg",
+            4: "resources/memes/level4_meme.jpg",
+            5: "resources/memes/level5_meme.jpg",
+            6: "resources/memes/level6_meme.jpg"
+        }
+        
+        # Versuche, das Meme-Bild zu laden und anzuzeigen
+        try:
+            meme_path = meme_paths.get(level)
+            if meme_path and os.path.exists(meme_path):
+                meme_image = Image.open(meme_path)
+                st.sidebar.image(meme_image, use_container_width=True)  # Korrigierter Parameter
+            else:
+                # Fallback, wenn das Bild nicht gefunden wird
+                st.sidebar.info(f"Level {level} Meme nicht gefunden")
+        except Exception as e:
+            st.sidebar.error(f"Fehler beim Laden des Memes: {e}")
+            
         st.sidebar.subheader("Fortschritt")
         st.sidebar.progress(progress / 100)
         st.sidebar.write(f"Level {level}: {progress}%")
         
+        # Hinzufügen einer Erklärung zu den Bloom-Taxonomie-Stufen
+        with st.sidebar.expander("Was bedeuten die Level?"):
+            st.write("""
+            StudySpark verwendet die Bloom-Taxonomie, ein Modell zur Klassifizierung von Lernzielen:
+            
+            **Level 1:** Erinnern - Fakten abrufen, wiedergeben, erkennen
+            
+            **Level 2:** Verstehen - Ideen oder Konzepte erklären
+            
+            **Level 3:** Anwenden - Informationen in neuen Situationen nutzen
+            
+            **Level 4:** Analysieren - Verbindungen zwischen Ideen herstellen
+            
+            **Level 5:** Bewerten - Standpunkte rechtfertigen, beurteilen
+            
+            **Level 6:** Erschaffen - Neues kreieren, entwickeln
+            
+            Mit steigendem Level werden die Fragen anspruchsvoller und fördern höhere kognitive Fähigkeiten.
+            """)
+        
+        # Hinzufügen einer Erklärung zum Punktesystem
+        with st.sidebar.expander("Wie funktioniert das Punktesystem?"):
+            st.write("""
+            **Punktzahl und Fortschritt:**
+            
+            - **90-100 Punkte:** +10% Fortschritt
+            - **70-89 Punkte:** +5% Fortschritt
+            - **50-69 Punkte:** 0% Fortschritt (keine Änderung)
+            - **0-49 Punkte:** -10% Fortschritt
+            
+            **Bewertung nach Fragetyp:**
+            
+            **Single-Choice:** 
+            - **Richtige Antwort:** 100 Punkte - wenn du die korrekte Option auswählst
+            - **Falsche Antwort:** 0 Punkte - wenn du eine falsche Option auswählst
+                     
+            **Multiple-Choice:** 
+            - **Perfekte Antwort:** 100 Punkte - wenn du alle richtigen Optionen auswählst und keine falschen
+            - **Teilweise richtig:** Anteilige Punktzahl - wenn du nur einige richtige Optionen ohne falsche auswählst
+                (Beispiel: Bei 3 richtigen Optionen erhältst du für 2 richtige 67 Punkte)
+            - **Mit Abzügen:** Reduzierte Punktzahl - wenn du sowohl richtige als auch falsche Optionen auswählst
+                (Jede falsche Option verringert deine Punktzahl)
+            
+            **Sortierung:** 
+            - **Perfekte Reihenfolge:** 100 Punkte - wenn alle Elemente in der richtigen Reihenfolge sind
+            - **Teilweise richtig:** Anteilige Punktzahl - basierend auf der Anzahl der Elemente an der richtigen Position
+                (Beispiel: Bei 4 Elementen erhältst du für 2 korrekt platzierte 50 Punkte)
+            
+            **Offene Fragen:** 
+            - **Individuelle Bewertung:** 0-100 Punkte - basierend auf der Qualität deiner Antwort und der Erfüllung der Bewertungskriterien
+            
+            **Level-Aufstieg:** Bei 100% Fortschritt steigst du automatisch ein Level auf und beginnst dort bei 0%.
+            """)
+            
+        # Hinzufügen eines Leaderboards
+        st.sidebar.markdown("---")
+        st.sidebar.subheader("🏆 Leaderboard")
+
+        # Leaderboard-Daten aus der Datenbank abrufen
+        try:
+            conn = sqlite3.connect("learning_progress.db")
+            cursor = conn.cursor()
+            
+            # Hole alle Benutzer, sortiert nach Level (absteigend) und Fortschritt (absteigend)
+            cursor.execute("""
+                SELECT student_id, level, progress 
+                FROM progress 
+                ORDER BY level DESC, progress DESC
+                LIMIT 3
+            """)
+            
+            top_users = cursor.fetchall()
+            
+            # Ermittle die Position des aktuellen Benutzers
+            cursor.execute("""
+                SELECT student_id, level, progress,
+                (SELECT COUNT(*) + 1 FROM progress p2 
+                WHERE (p2.level > p1.level) OR (p2.level = p1.level AND p2.progress > p1.progress)) as position
+                FROM progress p1
+                WHERE student_id = ?
+            """, (self.student_id,))
+            
+            current_user_data = cursor.fetchone()
+            current_position = current_user_data[3] if current_user_data else "?"
+            
+            conn.close()
+            
+            # Medaillen für die Top 3
+            medals = ["🥇", "🥈", "🥉"]
+            
+            # Zeige die Top 3 an
+            if top_users:
+                for i, user in enumerate(top_users):
+                    # Erstelle einen farbigen Hintergrund für jeden Eintrag
+                    bg_colors = ["#FFD700", "#C0C0C0", "#CD7F32"]  # Gold, Silber, Bronze
+                    
+                    # Extrahiere eine lesbare Benutzer-ID
+                    if user[0] == self.student_id:
+                        # Verwende den gespeicherten Benutzernamen für den aktuellen Benutzer
+                        display_name = st.session_state.username if hasattr(st.session_state, 'username') and st.session_state.username else f"Student {user[0].split('_')[-1]}"
+                    else:
+                        display_name = f"Student {user[0].split('_')[-1]}" if '_' in user[0] else user[0]
+                    
+                    # HTML für einen schönen Leaderboard-Eintrag
+                    html = f"""
+                    <div style="
+                        background-color: {bg_colors[i]}20; 
+                        border-radius: 10px; 
+                        padding: 8px; 
+                        margin-bottom: 8px;
+                        border-left: 4px solid {bg_colors[i]};
+                    ">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span style="font-size: 1.2em; font-weight: bold;">{medals[i]} {display_name}</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="font-weight: bold;">Level {user[1]}</span><br>
+                                <span>{user[2]}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    """
+                    st.sidebar.markdown(html, unsafe_allow_html=True)
+            else:
+                st.sidebar.info("Noch keine Benutzer im Leaderboard.")
+            
+            # Zeige den aktuellen Benutzer und seine Position
+            if hasattr(st.session_state, 'username') and st.session_state.username:
+                st.sidebar.markdown(f"**{st.session_state.username}'s Position:** #{current_position}")
+            else:
+                st.sidebar.markdown(f"**Deine Position:** #{current_position}")
+
+        except Exception as e:
+            st.sidebar.error(f"Fehler beim Laden des Leaderboards: {str(e)}")
+            
+            # Fallback: Zeige Dummy-Daten ohne Emojis
+            fallback_users = [
+                {"name": "Max", "level": 4, "progress": 75},
+                {"name": "Lisa", "level": 3, "progress": 90},
+                {"name": "Tim", "level": 2, "progress": 45}
+            ]
+            
+            for i, user in enumerate(fallback_users):
+                medal = ["🥇", "🥈", "🥉"][i]
+                bg_colors = ["#FFD700", "#C0C0C0", "#CD7F32"]
+                
+                html = f"""
+                <div style="
+                    background-color: {bg_colors[i]}20; 
+                    border-radius: 10px; 
+                    padding: 8px; 
+                    margin-bottom: 8px;
+                    border-left: 4px solid {bg_colors[i]};
+                ">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span style="font-size: 1.2em; font-weight: bold;">{medal} {user['name']}</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="font-weight: bold;">Level {user['level']}</span><br>
+                            <span>{user['progress']}%</span>
+                        </div>
+                    </div>
+                </div>
+                """
+                st.sidebar.markdown(html, unsafe_allow_html=True)
+            
+            if hasattr(st.session_state, 'username') and st.session_state.username:
+                st.sidebar.markdown(f"**{st.session_state.username}'s Position:** #?")
+            else:
+                st.sidebar.markdown(f"**Deine Position:** #?")
+
+        st.sidebar.markdown("---")
+
+
+
         # Niveau-Auswahl
         level_options = [f"Level {i}" for i in BLOOM_LEVELS.keys()]
         selected_level = st.sidebar.selectbox(
-            "Niveau:",
+            "Niveau: (nur zu illustrativen Zwecken)",
             level_options,
-            index=level-1
+            index=level-1,
+            key=f"level_select_{id(self)}"  # Eindeutiger key basierend auf der Objektinstanz
         )
         
         selected_level_num = int(selected_level.split(" ")[1])
         
-        if st.sidebar.button("Ändern"):
+        if st.sidebar.button("Ändern", key=f"change_level_{id(self)}"):
             success = self.update_student_level(selected_level_num)
             if success:
+                # Lösche alle gespeicherten Fragen, damit die nächste Frage auf dem richtigen Niveau ist
+                if hasattr(st.session_state, 'current_question'):
+                    st.session_state.current_question = None
+                
+                if hasattr(st.session_state, 'next_question'):
+                    st.session_state.next_question = None
+                    
+                # Lösche auch die Fragen-Queue im Service
+                if hasattr(self.service, 'question_queue') and self.student_id in self.service.question_queue:
+                    self.service.question_queue[self.student_id] = []
+                    
+                # Generiere eine neue Frage für das neue Level
+                self.service.pregenerate_question(self.student_id)
                 st.sidebar.success(f"Level auf {selected_level_num} geändert!")
                 st.rerun()
             else:
                 st.sidebar.error("Fehler beim Ändern des Levels.")
-

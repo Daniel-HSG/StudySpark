@@ -58,38 +58,61 @@ if st.session_state.first_visit and 'initialized' not in st.session_state:
     # Startbildschirm-Inhalt
     st.markdown('<h1 class="main-title">StudySpark</h1>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">Dein persönlicher Lernassistent</p>', unsafe_allow_html=True)
-    
+
     # Kurze Beschreibung
     st.markdown('<div class="app-description">StudySpark passt sich deinem Lerntempo an und hilft dir, Konzepte besser zu verstehen. Beantworte Fragen, erhalte sofortiges Feedback und vertiefe dein Wissen durch interaktives Lernen.</div>', unsafe_allow_html=True)
-    
+
+    # Namenseingabe hinzufügen
+    if 'username' not in st.session_state:
+        st.session_state.username = ""
+
+    username = st.text_input("Dein Name:", value=st.session_state.username)
+
     # Start-Button
     st.markdown('<div class="start-button">', unsafe_allow_html=True)
     if st.button("Jetzt mit dem Lernen beginnen", use_container_width=True):
-        # Initialisiere zuerst den Service und das Frontend
-        try:
-            # Learning-Service erstellen
-            from services import LearningService
-            from ui import StreamlitFrontend
+        if username.strip():
+            st.session_state.username = username
             
-            service = LearningService()
-            st.session_state.service = service
-            st.session_state.frontend = StreamlitFrontend(service)
-            st.session_state.frontend.initialize_session()
+            # Generiere eine eindeutige Student-ID basierend auf dem Namen
+            import hashlib
+            import time
             
-            st.session_state.current_question = None
-            st.session_state.current_feedback = None
-            st.session_state.show_feedback = False
-            st.session_state.next_question = None
+            # Kombiniere den Namen mit dem aktuellen Zeitstempel für Eindeutigkeit
+            unique_string = username + str(time.time())
+            # Erstelle einen Hash und verwende die ersten 8 Zeichen als ID
+            hashed = hashlib.md5(unique_string.encode()).hexdigest()[:8]
+            student_id = f"student_{hashed}"
+            st.session_state.student_id = student_id
             
-            # Dann zum Ladebildschirm wechseln
-            st.session_state.first_visit = False
-            st.session_state.loading = True
-            st.session_state.initialized = True
-            st.rerun()
-        except Exception as e:
-            st.error(f"Initialisierungsfehler: {str(e)}")
+            # Initialisiere zuerst den Service und das Frontend
+            try:
+                # Learning-Service erstellen
+                from services import LearningService
+                from ui import StreamlitFrontend
+                
+                service = LearningService()
+                st.session_state.service = service
+                st.session_state.frontend = StreamlitFrontend(service)
+                st.session_state.frontend.initialize_session(student_id)  # Verwende die generierte ID
+                
+                st.session_state.current_question = None
+                st.session_state.current_feedback = None
+                st.session_state.show_feedback = False
+                st.session_state.next_question = None
+                
+                # Dann zum Ladebildschirm wechseln
+                st.session_state.first_visit = False
+                st.session_state.loading = True
+                st.session_state.initialized = True
+                st.rerun()
+            except Exception as e:
+                st.error(f"Initialisierungsfehler: {str(e)}")
+        else:
+            st.error("Bitte gib deinen Namen ein, um fortzufahren.")
     st.markdown('</div>', unsafe_allow_html=True)
-    
+
+
     # Beende die Ausführung hier, damit der Rest des Codes nicht ausgeführt wird
     st.stop()
 
