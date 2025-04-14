@@ -1,0 +1,27 @@
+# Web-Framework
+streamlit>=1.32.0
+
+# LangChain und OpenAI
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-community>=0.0.10
+openai>=1.10.0
+
+# Vektordatenbank und Embeddings
+faiss-cpu>=1.7.4
+
+# PDF-Verarbeitung
+pypdf>=3.17.0
+
+# Umgebungsvariablen
+python-dotenv>=1.0.0
+
+# Grundlegende Bibliotheken
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Datenbank
+sqlite3
+
+# Dateisystem-Operationen
+glob2>=0.7
