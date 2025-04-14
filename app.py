@@ -313,6 +313,11 @@ else:
                     st.session_state.current_question = st.session_state.frontend.get_new_question()
                     
             st.session_state.show_feedback = False
+
+            # Setze auch die Nachfrage-Historie im Frontend-Objekt zurück
+            if hasattr(st.session_state.frontend, 'followup_history'):
+                st.session_state.frontend.followup_history = []
+
             st.rerun()
         except Exception as e:
             st.error(f"Fehler beim Laden der nächsten Frage: {str(e)}")
