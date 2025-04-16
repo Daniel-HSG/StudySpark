@@ -26,14 +26,14 @@ Das Projekt ist in Python implementiert und nutzt folgende Hauptkomponenten:
 
 ## Projektstruktur
 StudySpark/
-├── app.py             # Hauptanwendung (Streamlit-Einstiegspunkt)
-├── ui.py              # Frontend-Implementierungen (Konsole und Streamlit)
-├── services.py        # Backend-Services und LLM-Integration
-├── models.py          # Datenmodelle und Datenbankfunktionen
-├── prompts.py         # Prompts für die KI-Generierung
-├── config.py          # Konfigurationsdatei (API-Schlüssel)
-├── brand_styles.css   # CSS für das Streamlit-Frontend
-├── requirements.txt   # Abhängigkeiten
-└── resources/         # Lernmaterialien und Ressourcen
-    ├── modul1.txt     # Lerninhalt für Modul 1
-    └── memes/         # Bilder für die Benutzeroberfläche
+├── app.py              Hauptanwendung (Streamlit-Einstiegspunkt)
+├── ui.py               Frontend-Implementierungen (Konsole und Streamlit)
+├── services.py         Backend-Services und LLM-Integration
+├── models.py           Datenmodelle und Datenbankfunktionen
+├── prompts.py          Prompts für die KI-Generierung
+├── config.py           Konfigurationsdatei (API-Schlüssel)
+├── brand_styles.css    CSS für das Streamlit-Frontend
+├── requirements.txt    Abhängigkeiten
+└── resources/          Lernmaterialien und Ressourcen
+    ├── modul1.txt      Lerninhalt für Modul 1
+    └── memes/          Bilder für die Benutzeroberfläche
