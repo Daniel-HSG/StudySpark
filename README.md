@@ -35,5 +35,5 @@ StudySpark/
 ├── brand_styles.css   # CSS für das Streamlit-Frontend
 ├── requirements.txt   # Abhängigkeiten
 └── resources/         # Lernmaterialien und Ressourcen
-├── modul1.txt     # Lerninhalt für Modul 1
-└── memes/         # Bilder für die Benutzeroberfläche
+    ├── modul1.txt     # Lerninhalt für Modul 1
+    └── memes/         # Bilder für die Benutzeroberfläche
